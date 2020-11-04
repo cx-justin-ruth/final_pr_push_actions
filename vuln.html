@@ -3,6 +3,10 @@
 <body>
 <p>Service ID:
 <div id="demo"></div>
+<div id="demo2"></div>
+<div id="demo3"></div>
+<div id="demo4"></div>
+<div id="demo5"></div>
 </p>
 </body>
 <script>
@@ -17,5 +21,16 @@
         console.log(VulnerableVariable);
         document.getElementById("demo").innerHTML = VulnerableVariable;
   }
+  
+  const id = urlParams.get('pwn');
+  console.log(id);
+
+  if (id != undefined) {
+        const VulnerableVariable = 'id_' + pwn;
+        console.log(VulnerableVariable);
+        document.getElementById("demo2").innerHTML = VulnerableVariable;
+  }
+  
+  
 </script>
 </html>
