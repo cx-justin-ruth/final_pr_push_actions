@@ -1,0 +1,21 @@
+<!-- Vuln include JS code -->
+<html>
+<body>
+<p>Service ID:
+<div id="demo"></div>
+</p>
+</body>
+<script>
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  const id = urlParams.get('id');
+  console.log(id);
+
+  if (id != undefined) {
+        const VulnerableVariable = 'id_' + id;
+        console.log(VulnerableVariable);
+        document.getElementById("demo").innerHTML = VulnerableVariable;
+  }
+</script>
+</html>
