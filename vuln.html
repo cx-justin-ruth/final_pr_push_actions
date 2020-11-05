@@ -13,24 +13,31 @@
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  const id = urlParams.get('id');
+  const demo = urlParams.get('demo');
+  const demo2 = urlParams.get('demo2');
+  const demo3 = urlParams.get('demo3');
   console.log(id);
 
   if (id != undefined) {
-        const VulnerableVariable = 'id_' + id;
+        const VulnerableVariableDemo = 'id_' + demo;
         console.log(VulnerableVariable);
-        document.getElementById("demo").innerHTML = VulnerableVariable;
+        document.getElementById("demo").innerHTML = VulnerableVariableDemo;
   }
   
-  const id = urlParams.get('pwn');
+  
   console.log(id);
 
-  if (id != undefined) {
-        const VulnerableVariable = 'id_' + pwn;
-        console.log(VulnerableVariable);
-        document.getElementById("demo2").innerHTML = VulnerableVariable;
+  if (demo2 != undefined) {
+        const VulnerableVariableDemo2 = 'id_' + pwn;
+        console.log(VulnerableVariableDemo2);
+        document.getElementById("demo2").innerHTML = VulnerableVariableDemo2;
   }
   
+    if (demo3 != undefined) {
+        const VulnerableVariable = 'id_' + demo3;
+        console.log(VulnerableVariableDemo3);
+        document.getElementById("demo3").innerHTML = VulnerableVariableDemo3;
+  }
   
 </script>
 </html>
