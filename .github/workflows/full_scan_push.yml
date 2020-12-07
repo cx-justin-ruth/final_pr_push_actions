@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     # Steps require - checkout code, run CxFlow Action, Upload SARIF report (optional)
     steps:
-    - name: Get the Organization Name
-      run: echo ::set-env name=ORG_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')
+    #- name: Get the Organization Name
+      #run: echo ::set-env name=ORG_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     # Runs the Checkmarx Scan leveraging the latest version of CxFlow - REFER to Action README for list of inputs
