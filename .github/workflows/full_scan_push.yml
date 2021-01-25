@@ -29,4 +29,4 @@ jobs:
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
     # Github PR issues
         github_token: ${{ secrets.GH_TOKEN }}
-        params: --cxflow.enabled-vulnerability-scanners=sast --checkmarx.incremental=false --checkmarx.scan-preset=High_and_Medium --namespace=${{ env.ORG_NAME }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cxflow.bug-tracker=GitHub --checkmarx.exclude-folders="*exclude_test*,assets/,cypress/,jest-cache/,node_modules/,public/,coverage/,__MOCKS__/,__mocks__/,__tests__/"
+        params: --cxflow.enabled-vulnerability-scanners=sast --checkmarx.incremental=false --checkmarx.scan-preset=High_and_Medium --namespace=${{ env.ORG_NAME }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cxflow.bug-tracker=GitHub --checkmarx.exclude-folders="exclude_test/"
