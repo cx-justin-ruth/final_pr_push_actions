@@ -23,10 +23,11 @@ jobs:
       with:
         project: jr_${{ github.event.repository.name }}
         team: '/CxServer'
+        exclude-folders: "exclude_test/"
         checkmarx_url: ${{ secrets.CHECKMARX_URL }}
         checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
     # Github PR issues
         github_token: ${{ secrets.GH_TOKEN }}
-        params: --cxflow.enabled-vulnerability-scanners=sast --checkmarx.incremental=false --checkmarx.scan-preset=High_and_Medium --namespace=${{ env.ORG_NAME }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cxflow.bug-tracker=GitHub --checkmarx.exclude-folders="exclude_test/"
+        params: --cxflow.enabled-vulnerability-scanners=sast --checkmarx.exclude-folders="exclude_test/" --checkmarx.incremental=false --checkmarx.scan-preset=High_and_Medium --namespace=${{ env.ORG_NAME }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cxflow.bug-tracker=GitHub
