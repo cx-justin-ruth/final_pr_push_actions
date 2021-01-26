@@ -1,32 +1,45 @@
-# This action is meant to illistrate an incremental scan on PR.
-name: CxFlow on push
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# This workflow is to automate Checkmarx SAST scans.  It runs on a push to the main branch.
+#
+# The following GitHub Secrets must be first defined:
+#   - CHECKMARX_URL
+#   - CHECKMARX_USER
+#   - CHECKMARX_PASSWORD
+#   - CHECKMARX_CLIENT_SECRET
+#
+# The following variables must be inserted below:
+#   - <ProjectName>
+#
+# Update the 'team' field to reflect the team name used in Checkmarx.
+#
+# For full documentation, including a list of all inputs, please refer to the README https://github.com/checkmarx-ts/checkmarx-cxflow-github-action
+
+name: Checkmarx SAST Scan
 on:
   push:
-    branches: [ master, main ]
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel - this job is specifically configured to use the Checkmarx CxFlow Action
+    branches:
+      - main
+      - master
+    
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on - Ubuntu is required as Docker is leveraged for the action
     runs-on: ubuntu-latest
-    # Steps require - checkout code, run CxFlow Action, Upload SARIF report (optional)
     steps:
-    #- name: Get the Organization Name
-      #run: echo ::set-env name=ORG_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    # Runs the Checkmarx Scan leveraging the latest version of CxFlow - REFER to Action README for list of inputs
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Checkmarx CxFlow Action
-      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.0-9.x
+      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.1 #Github Action version
       with:
         project: test_justin
-        team: '/CxServer'
-        checkmarx_url: ${{ secrets.CHECKMARX_URL }}
-        checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
-        checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
-        checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
-    # Github PR issues
-        github_token: ${{ secrets.GH_TOKEN }}
-        params: --cxflow.enabled-vulnerability-scanners=sast --checkmarx.exclude-folders="exclude_test/" --checkmarx.incremental=false --checkmarx.scan-preset=High_and_Medium --namespace=${{ env.ORG_NAME }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }} --cxflow.bug-tracker=GitHub
+        team: /CxServer
+        checkmarx_url: ${{ secrets.CHECKMARX_URL }} # To be stored in GitHub Secrets.
+        checkmarx_username: ${{ secrets.CHECKMARX_USER }} # To be stored in GitHub Secrets.
+        checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }} # To be stored in GitHub Secrets.
+        checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }} # To be stored in GitHub Secrets.
+        break_build: false
+        scanners: sast
+        bug_tracker: Sarif
+        params: --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }}
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: cx.sarif
