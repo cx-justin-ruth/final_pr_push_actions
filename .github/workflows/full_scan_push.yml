@@ -2,7 +2,7 @@
 #
 # The following GitHub Secrets must be first defined:
 #   - CHECKMARX_URL
-#   - CHECKMARX_USER
+#   - CHECKMARX_USERNAME
 #   - CHECKMARX_PASSWORD
 #   - CHECKMARX_CLIENT_SECRET
 #
@@ -32,7 +32,7 @@ jobs:
         project: test_justin
         team: /CxServer
         checkmarx_url: ${{ secrets.CHECKMARX_URL }} # To be stored in GitHub Secrets.
-        checkmarx_username: ${{ secrets.CHECKMARX_USER }} # To be stored in GitHub Secrets.
+        checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }} # To be stored in GitHub Secrets.
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }} # To be stored in GitHub Secrets.
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }} # To be stored in GitHub Secrets.
         break_build: false
