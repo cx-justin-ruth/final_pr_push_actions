@@ -39,4 +39,4 @@ jobs:
         scanners: sast
         incremental: false
         bug_tracker: Sarif
-        params: --debug --exclude-folders="exclude_test/"
+        params: --debug --checkmarx.settingsOverride=true --exclude-folders="exclude_test/"
